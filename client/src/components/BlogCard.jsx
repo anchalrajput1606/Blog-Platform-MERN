@@ -1,7 +1,8 @@
 import "../styles/BlogCard.css";
 import CommentSection from "./CommentSection";
 function BlogCard({ blog, onEdit, onDelete, onLike }) {
-  return (
+    const userId = localStorage.getItem("userId");
+    return (
     <div className="blog-card">
 
       <h2>{blog.title}</h2>

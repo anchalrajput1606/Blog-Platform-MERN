@@ -1,7 +1,10 @@
+import "../styles/CommentSection.css";
 import { useEffect, useState } from "react";
 import API from "../services/api";
 
 function CommentSection({ blogId }) {
+
+  const userId = localStorage.getItem("userId");
 
   const [comments, setComments] = useState([]);
   const [text, setText] = useState("");
@@ -23,51 +26,78 @@ function CommentSection({ blogId }) {
   };
 
   const addComment = async () => {
-    try {
+        try {
 
-      await API.post(`/comments/${blogId}`, {
-        text,
-      });
+        await API.post(`/comments/${blogId}`, {
+            text,
+        });
 
-      setText("");
+        setText("");
 
-      fetchComments();
+        fetchComments();
 
-    } catch (error) {
-      console.log(error);
-    }
-  };
+        } catch (error) {
+        console.log(error);
+        }
+
+    
+    };
+
+    const deleteComment = async (id) => {
+        try {
+
+            await API.delete(`/comments/${id}`);
+
+            fetchComments();
+
+        } catch (error) {
+
+            console.log(error);
+            alert("Error deleting comment");
+
+        }
+    };
 
   return (
-    <div>
+        <div className="comment-section">
 
-      <h4>Comments</h4>
+            <h4>Comments</h4>
 
-      {comments.map((comment) => (
+            {comments.length === 0 ? (
+            <p>No comments yet.</p>
+            ) : (
+            comments.map((comment) => (
+                <div className="comment" key={comment._id}>
 
-        <div key={comment._id}>
+                    <strong>{comment.user?.name}</strong>
 
-          <b>{comment.user?.name}</b>
+                    <p>{comment.text}</p>
 
-          <p>{comment.text}</p>
+                    <button
+                        onClick={() => deleteComment(comment._id)}
+                    >
+                        Delete
+                    </button>
+
+                </div>
+            ))
+            )}
+
+            <div className="comment-input">
+            <input
+                type="text"
+                placeholder="Write a comment..."
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+            />
+
+            <button onClick={addComment}>
+                Add
+            </button>
+            </div>
 
         </div>
-
-      ))}
-
-      <input
-        type="text"
-        placeholder="Write a comment..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-
-      <button onClick={addComment}>
-        Add Comment
-      </button>
-
-    </div>
-  );
+    );
 }
 
 export default CommentSection;

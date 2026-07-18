@@ -19,7 +19,7 @@ function Login() {
       });
 
       localStorage.setItem("token", response.data.token);
-
+      localStorage.setItem("userId", response.data.user.id);
       alert("Login Successful!");
 
       navigate("/dashboard");

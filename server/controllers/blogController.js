@@ -34,7 +34,7 @@ const createBlog = async (req, res) => {
 const getBlogs = async (req, res) => {
   try {
     const blogs = await Blog.find()
-      .populate("author", "name email")
+      .populate("author", "_id name email")
       .sort({ createdAt: -1 });
 
     return res.status(200).json(blogs);
@@ -50,7 +50,7 @@ const getBlogs = async (req, res) => {
 const getBlogById = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id)
-      .populate("author", "name email");
+      .populate("author", "_id name email")
 
     if (!blog) {
       return res.status(404).json({

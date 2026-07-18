@@ -39,7 +39,7 @@ function BlogForm({ refresh, setRefresh, editingBlog, setEditingBlog }) {
                 image: "",
             });
 
-            alert("Blog Created Successfully!");
+            
 
         }
 
