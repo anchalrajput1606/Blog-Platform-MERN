@@ -1,0 +1,32 @@
+.navbar {
+  background: linear-gradient(90deg, #2563eb, #1e40af);
+  color: white;
+  padding: 15px 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.navbar h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.navbar button {
+  background: white;
+  color: #2563eb;
+
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.navbar button:hover {
+  background: #f3f4f6;
+}

@@ -1,24 +1,26 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "../styles/Navbar.css";
 
 function Navbar() {
+
   const navigate = useNavigate();
 
   const logout = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    localStorage.removeItem("userId");
+
+    navigate("/login");
   };
 
   return (
-    <nav>
-      <h2>Blog Platform</h2>
+    <nav className="navbar">
 
-      <div>
-        <Link to="/dashboard">Home</Link>
+      <h2>📝 Blog Platform</h2>
 
-        <button onClick={logout}>
-          Logout
-        </button>
-      </div>
+      <button onClick={logout}>
+        Logout
+      </button>
+
     </nav>
   );
 }

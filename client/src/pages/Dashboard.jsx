@@ -1,3 +1,4 @@
+import "../styles/Dashboard.css";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import BlogForm from "../components/BlogForm";

@@ -1,3 +1,4 @@
+import "../styles/BlogForm.css";
 import { useState, useEffect } from "react";
 import API from "../services/api";
 

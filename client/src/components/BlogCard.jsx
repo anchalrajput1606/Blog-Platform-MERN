@@ -1,3 +1,5 @@
+import "../styles/BlogCard.css";
+import CommentSection from "./CommentSection";
 function BlogCard({ blog, onEdit, onDelete, onLike }) {
   return (
     <div className="blog-card">
@@ -24,6 +26,7 @@ function BlogCard({ blog, onEdit, onDelete, onLike }) {
         <button onClick={() => onLike(blog._id)}>
         ❤️ Like
         </button>
+        <CommentSection blogId={blog._id} />
 
     </div>
   );
