@@ -9,6 +9,7 @@ const {
   getBlogById,
   updateBlog,
   deleteBlog,
+  likeUnlikeBlog,
 } = require("../controllers/blogController");
 
 // Create Blog
@@ -25,5 +26,8 @@ router.put("/:id", protect, updateBlog);
 
 // Delete Blog
 router.delete("/:id", protect, deleteBlog);
+
+// Like/Unlike Blog
+router.put("/:id/like", protect, likeUnlikeBlog);
 
 module.exports = router;

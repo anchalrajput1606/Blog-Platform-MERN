@@ -128,10 +128,50 @@ const deleteBlog = async (req, res) => {
   }
 };
 
+const likeUnlikeBlog = async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+
+    if (!blog) {
+      return res.status(404).json({
+        message: "Blog not found",
+      });
+    }
+
+    const alreadyLiked = blog.likes.includes(req.user._id);
+
+    if (alreadyLiked) {
+      blog.likes.pull(req.user._id);
+
+      await blog.save();
+
+      return res.status(200).json({
+        message: "Blog Unliked",
+        likes: blog.likes.length,
+      });
+    }
+
+    blog.likes.push(req.user._id);
+
+    await blog.save();
+
+    return res.status(200).json({
+      message: "Blog Liked",
+      likes: blog.likes.length,
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   createBlog,
   getBlogs,
   getBlogById,
   updateBlog,
   deleteBlog,
+  likeUnlikeBlog,
 };
