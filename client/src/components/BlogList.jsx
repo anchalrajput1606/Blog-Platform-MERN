@@ -16,8 +16,44 @@ function BlogList({ refresh, setRefresh, setEditingBlog }) {
 
       setBlogs(response.data);
 
-    } catch (error) {
+    } 
+    catch (error) {
       console.log(error);
+    }
+  };
+
+  const deleteBlog = async (id) => {
+    try {
+
+      await API.delete(`/blogs/${id}`);
+
+        alert("Blog Deleted Successfully!");
+
+        fetchBlogs();
+
+    } 
+      catch (error) {
+
+        console.log(error);
+        alert("Error deleting blog");
+
+      }
+    
+  };
+
+  const likeBlog = async (id) => {
+    try {
+
+      await API.put(`/blogs/${id}/like`);
+
+      fetchBlogs();
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert("Error liking blog");
+
     }
   };
 
@@ -29,6 +65,8 @@ function BlogList({ refresh, setRefresh, setEditingBlog }) {
           key={blog._id}
           blog={blog}
           onEdit={() => setEditingBlog(blog)}
+          onDelete={deleteBlog}
+          onLike={likeBlog}
         />
       ))}
 
