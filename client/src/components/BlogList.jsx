@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 import BlogCard from "./BlogCard";
 
-function BlogList({ refresh }) {
+function BlogList({ refresh, setRefresh, setEditingBlog }) {
 
   const [blogs, setBlogs] = useState([]);
 
@@ -28,6 +28,7 @@ function BlogList({ refresh }) {
         <BlogCard
           key={blog._id}
           blog={blog}
+          onEdit={() => setEditingBlog(blog)}
         />
       ))}
 

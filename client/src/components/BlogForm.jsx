@@ -1,19 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import API from "../services/api";
 
-function BlogForm({ refresh, setRefresh }) {
+function BlogForm({ refresh, setRefresh, editingBlog, setEditingBlog }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  useEffect(() => {
+    if (editingBlog) {
+      setTitle(editingBlog.title);
+      setContent(editingBlog.content);
+    } else {
+      setTitle("");
+      setContent("");
+    }
+  }, [editingBlog]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await API.post("/blogs", {
-        title,
-        content,
-        image: "",
-      });
+      if (editingBlog) {
+
+            await API.put(`/blogs/${editingBlog._id}`, {
+                title,
+                content,
+            });
+
+            alert("Blog Updated Successfully!");
+
+            setEditingBlog(null);
+
+            } else {
+
+            await API.post("/blogs", {
+                title,
+                content,
+                image: "",
+            });
+
+            alert("Blog Created Successfully!");
+
+        }
 
       
 
@@ -50,7 +77,7 @@ function BlogForm({ refresh, setRefresh }) {
         />
 
         <button type="submit">
-          Publish Blog
+            {editingBlog ? "Update Blog" : "Publish Blog"}
         </button>
 
       </form>
