@@ -1,4 +1,4 @@
-import "./Login.css";
+import "../styles/Login.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../services/api";
@@ -34,7 +34,7 @@ function Login() {
 
       <div className="login-card">
 
-        <h1>📋 Task Manager</h1>
+        <h1>Blog Platform</h1>
 
         <p>Welcome Back 👋</p>
 

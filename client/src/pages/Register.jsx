@@ -1,4 +1,4 @@
-import "./Register.css";
+import "../styles/Register.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../services/api";
@@ -34,7 +34,7 @@ function Register() {
 
       <div className="register-card">
 
-        <h1>📋 Task Manager</h1>
+        <h1>Blog Platform</h1>
 
         <p>Create Your Account ✨</p>
 
