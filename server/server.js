@@ -1,10 +1,10 @@
-const blogRoutes = require("./routes/blogRoutes");
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const blogRoutes = require("./routes/blogRoutes");
 
 const connectDB = require("./config/db");
-
+const commentRoutes = require("./routes/commentRoutes");
 const authRoutes = require("./routes/authRoutes");
 dotenv.config();
 
@@ -16,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/blogs", blogRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/comments", commentRoutes);
 
 
 app.get("/", (req, res) => {
